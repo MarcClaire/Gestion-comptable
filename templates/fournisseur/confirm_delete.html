@@ -1,0 +1,92 @@
+<div class="modal fade" id="delete{{ligne.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" >        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" >
+
+                 voulez vous vraiment supprimer cet fournisseur?
+
+                  <div class="card-footer">
+                    <a href="{% url 'destroyFournisseur' ligne.id %}" button type="submit" id="id" class="btn btn-outline-info delete-btn">OUI</a>
+                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="update{{ligne.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" >        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" >
+
+                 voulez vous vraiment modifier ce fournisseur?
+
+                  <div class="card-footer">
+                    <a href="{% url 'updatefournisseur' ligne.id%}" button type="submit" id="id" class="btn btn-outline-info delete-btn">OUI</a>
+                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+ <div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark text-center" id="exampleModalLabel">Modification</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <form method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+
+               <input name="id_modified" type="hidden" id="id_modified">
+
+               <label id="label_id" class="text-dark checkbox-inline"> <strong id="strong_id"> Cette facture est-elle payé?</strong></label>
+
+
+               <div>
+                  <input type="radio" id="html" name="modified" value="True">
+                  <label class="text-white bg-primary" for="html">Oui</label>
+
+                  <input type="radio" id="css" name="modified" value="False">
+                  <label class="text-white bg-danger" for="css">Non</label><br>
+               </div>
+
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+               <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div> 
+
+
+<script type="text/javascript">
+     // modification facture
+
+   $(document).on('click', '#btn-fourni-mod', function(){
+      let fournisseur_id = $(this).data('id');
+      $('#id_modified').val(fournisseur_id);
+
+   })
+
+
+</script>

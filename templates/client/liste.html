@@ -1,0 +1,73 @@
+ {% extends 'layout/Layout.html'%}
+ <!-- Page Heading -->
+ {% load static %}
+ {% block content %}
+
+
+
+
+<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <div class="">
+                              <h4 class="text-capitalize text-center mx-10 bg-dark text-white">Liste des clients </h4>
+                          </div>
+                          <div class="">                              
+                            <a class="btn btn-outline-info float-right" href="{% url 'addClient'  %}">NOUVEAU <i class="fas fa-plus"></i></a>
+                            
+                          </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                          <th>#</th>
+                                          <th>Nom Complet</th>
+                                          <th>Téléphone</th>
+                                          <th>Adresse</th>
+                                          <th>Email</th>
+                                          <th>Sexe</th>
+                                          <th>Age</th>
+                                          <th>Date de creation</th>
+                                          <th>Enregistré par</th>
+                                          <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for ligne in clients %}
+                                       <tr>
+                                            <td>{{ligne.id}}</td>
+                                            <td>{{ ligne.nom }} {{ ligne.prenom }}</td>
+                                            <td>{{ligne.tel}}</td>
+                                            <td>{{ligne.adresse}}</td>
+                                            <td>{{ligne.email}}</td>
+                                            <td>{{ligne.get_sexe_display}}</td>
+                                            <td>{{ligne.age}}</td>
+                                            <td>{{ligne.date_creation| date:"d/m/y"}}</td>
+                                            <td>{{ligne.enregistre_par.username}}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div><button type="button" data-toggle="modal" data-target="#delete{{ligne.id}}" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></div>
+
+                                                <div><button type="button" data-toggle="modal" data-target="#update{{ligne.id}}" class="btn btn-outline-success"><i class="fas fa-pen"></i></button></div>
+
+
+
+
+                                                <!-- <div><button type="button" data-toggle="modal"  class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></div> -->
+                                                </div>
+                                                
+                                            </td>
+                                         </tr>
+                                         {% include 'client/confirm_delete.html' %}
+                                      {% endfor %}
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+  {% endblock %}

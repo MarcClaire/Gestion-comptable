@@ -1,0 +1,28 @@
+<div class="modal fade" id="ajoutercategorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-dark text-center" id="exampleModalLabel"> AJOUTER UNE CATEGORIE </h1>
+            </div>
+            <form method="POST" action="{% url 'addCategorie' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="intitule-cat">Intitulé</label>
+                            <input required name="intitule" type="text" class="form-control" id="intitule-cat">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+ {% extends 'layout/Layout.html'%}
+ <!-- Page Heading -->
+ {% load static %}
+ {% block content %}
+
+{% include  'modal_form.html' %}
+
+
+<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <div class="">
+                              <h4 class="">Liste des employés </h4>
+                          </div>
+                          <div class="">                              
+                            <a type="button" data-toggle="modal" data-target="#modalForm" class="btn btn-outline-info float-right">NOUVEAU <i class="fas fa-plus"></i></a>
+                            
+                          </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                          <th>Matricule</th>
+                                          <th>Nom</th>
+                                          <th>Prenom</th>
+                                          <th>Date naissance</th>
+                                          <th>Lieu naissance</th>
+                                          <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for ligne in personel %}
+                                       <tr>
+                                            <td>{{ligne.matricule}}</td>
+                                            <td>{{ligne.nom}}</td>
+                                            <td>{{ligne.prenom}}</td>
+                                            <td>{{ligne.date_naiss}}</td>
+                                            <td>{{ligne.lieu_naiss}}</td>
+                                            <td>
+                                                <button type="button" data-toggle="modal" data-target="#updateForm{{ligne.id}}" class="btn btn-outline-success"><i class="fas fa-pen"></i></button>
+                                            </td>
+                                         </tr>
+                                        {% include  'modal_update_form.html' %}
+                                      {% endfor %}
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+  {% endblock %}

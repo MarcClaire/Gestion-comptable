@@ -1,0 +1,99 @@
+{% extends 'layout/Layout.html' %}
+
+
+<!-- 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center">Bilan au {{ bilan.date }}</h1>
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Postes</th>
+                        <th>Montant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Actifs Totals</td>
+                        <td>{{ bilan.actifs_total }}</td>
+                    </tr>
+                    <tr>
+                        <td>Passifs Totals</td>
+                        <td>{{ bilan.passifs_total }}</td>
+                    </tr>
+                    <tr>
+                        <td>Capitaux Propres</td>
+                        <td>{{ bilan.capitaux_propres }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+-->
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center">Bilan au {{ bilan.date }}</h1>
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Postes</th>
+                        <th>Montant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Actifs -->
+                    <tr>
+                        <td colspan="2"><strong>Actifs</strong></td>
+                    </tr>
+                    {% for transaction in actifs_transactions %}
+                    <tr>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.montant }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>Total Actifs</td>
+                        <td>{{ bilan.actifs_total }}</td>
+                    </tr>
+
+                    <!-- Passifs -->
+                    <tr>
+                        <td colspan="2"><strong>Passifs</strong></td>
+                    </tr>
+                    {% for transaction in passifs_transactions %}
+                    <tr>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.montant }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>Total Passifs</td>
+                        <td>{{ bilan.passifs_total }}</td>
+                    </tr>
+
+                    <!-- Capitaux Propres -->
+                    <tr>
+                        <td colspan="2"><strong>Capitaux Propres</strong></td>
+                    </tr>
+                    {% for transaction in capitaux_transactions %}
+                    <tr>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.montant }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>Capitaux Propres</td>
+                        <td>{{ bilan.capitaux_propres }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

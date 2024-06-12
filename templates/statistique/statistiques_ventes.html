@@ -1,0 +1,20 @@
+{% extends 'layout/Layout.html' %}
+
+{% block content %}
+    <title>Statistiques des Ventes</title>
+
+    <h1>Statistiques des Ventes</h1>
+
+    <h2>Total des ventes par article</h2>
+    <img src="data:image/png;base64,{{ graphique_ventes_par_article }}" alt="Graphique des ventes par article">
+
+    <h2>Total des ventes par mois</h2>
+    <img src="data:image/png;base64,{{ graphique_ventes_par_mois }}" alt="Graphique des ventes par mois">
+
+    <h2>Top 5 des ventes par article</h2>
+    <img src="data:image/png;base64,{{ graphique_top_articles }}" alt="Top 5 des ventes par article">
+
+    <h2>Distribution des ventes par article</h2>
+    <img src="data:image/png;base64,{{ graphique_distribution_ventes }}" alt="Distribution des ventes par article">
+
+{% endblock %}

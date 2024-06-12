@@ -1,0 +1,10 @@
+{% extends 'layout/Layout.html' %}
+
+{% block content %}
+    <h1>Supprimer le Compte</h1>
+    <p>Êtes-vous sûr de vouloir supprimer ce compte : {{ object.nom }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Oui, supprimer</button>
+    </form>
+{% endblock %}

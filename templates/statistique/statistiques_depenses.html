@@ -1,0 +1,22 @@
+{% extends 'layout/Layout.html' %}
+
+{% block content %}
+     <title>Statistiques des Dépenses</title>
+
+    <h1>Statistiques des Dépenses</h1>
+
+    <h2>Total des dépenses par catégorie</h2>
+    <img src="data:image/png;base64,{{ graphique_depenses_par_categorie }}" alt="Graphique des dépenses par catégorie">
+
+    <h2>Total des dépenses par mois</h2>
+    <img src="data:image/png;base64,{{ graphique_depenses_par_mois }}" alt="Graphique des dépenses par mois">
+
+    <h2>Top 5 des dépenses par catégorie</h2>
+    <img src="data:image/png;base64,{{ graphique_top_categories }}" alt="Top 5 des dépenses par catégorie">
+
+    <h2>Distribution des dépenses par catégorie</h2>
+    <img src="data:image/png;base64,{{ graphique_distribution_depenses }}" alt="Distribution des dépenses par catégorie"> 
+
+{% endblock %}
+
+

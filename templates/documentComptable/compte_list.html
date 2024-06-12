@@ -1,0 +1,61 @@
+{% extends 'layout/Layout.html' %}
+
+{% block content %}
+
+
+<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <div class="">
+                              <h4 class="text-capitalize text-center mx-10 bg-dark text-white">Liste des comptes </h4>
+                          </div>
+                          <div class="">                              
+                            <a class="btn btn-outline-info float-right" href="{% url 'compte_create' %}">NOUVEAU <i class="fas fa-plus"></i></a>
+                            
+                          </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                          <th>#</th>
+                                          <th>Nom du compte</th>
+                                          <th>Type de compte</th>
+                                          <th>Somme total du compte</th>
+                                          <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for compte in object_list %}
+                                       <tr>
+                                            <td>{{ compte.id }}</td>
+                                            <td>{{ compte.nom }}</td>
+                                            <td>{{ compte.type_compte }}</td>
+                                            <td>{{ compte.valeur }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class="btn btn-outline-success">
+                                                        <a href="{% url 'compte_update' compte.pk %}"><i class="fas fa-pen"></i>Modifier</a>
+                                                    </div>
+                                                    <div class="btn btn-outline-danger">
+                                                        <a href="{% url 'compte_delete' compte.pk %}"> <i class="fas fa-trash"></i>Supprimer</a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
+                                         </tr>
+                                        
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+{% endblock %}

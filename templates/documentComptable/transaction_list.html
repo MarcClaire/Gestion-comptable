@@ -1,0 +1,51 @@
+{% extends 'layout/Layout.html' %}
+
+{% block content %}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="">
+            <h4 class="text-capitalize text-center mx-10 bg-dark text-white">Liste des Transactions</h4>
+        </div>
+        <div class="">                              
+            <a class="btn btn-outline-info float-right" href="{% url 'transaction_create' %}">NOUVEAU <i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Description de la transaction</th>
+                        <th>Montant de la transaction</th>
+                        <th>Date de la transaction</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in object_list %}
+                    <tr>
+                        <td>{{ transaction.id }}</td>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.montant }}</td>
+                        <td>{{ transaction.date }}</td>
+                        <td>
+                            <div class="d-flex">
+                                <div class="btn btn-outline-success">
+                                    <a href="{% url 'transaction_update' transaction.pk %}"><i class="fas fa-pen"></i>Modifier</a>
+                                </div>
+                                <div class="btn btn-outline-danger">
+                                    <a href="{% url 'transaction_delete' transaction.pk %}"><i class="fas fa-trash"></i>Supprimer</a>
+                                </div>
+                            </div>                     
+                        </td>
+                    </tr>
+                    {% endfor %}                 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

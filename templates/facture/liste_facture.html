@@ -1,0 +1,123 @@
+ {% extends 'layout/Layout.html'%}
+ <!-- Page Heading -->
+ {% load static %}
+ {% block content %}
+
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="">
+            <h4 class="text-capitalize text-center mx-10 bg-dark text-white">Liste des factures </h4>
+        </div>
+        <div class="">                              
+            <a class="btn btn-outline-info float-right" href="{% url 'addfacture'  %}">NOUVEAU <i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">NOM DU CLIENT</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col">PAYE</th>
+                        <th scope="col">TYPE FACTURE</th>s
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    {% if factures %}
+                    {% for facture in factures %} 
+                    <tr>chrome
+                        <td>{{facture.id}}</td>
+                        <td>{{facture.client.nom}} {{facture.client.prenom}}</td>
+                        <td>{{facture.date_creation_facture | date:"d/m/y" }}</td>
+                        <td>{{ facture.get_total }}</td>
+
+                        <td>
+                            {% if facture.paye %}
+                            <img src="{% static 'images/icon-yes.svg' %}" alt="True">
+                            {% else %}
+                            <img src="{% static 'images/icon-no.svg' %}" alt="False">
+                            {% endif%}
+                        </td>
+                        <td>{{ facture.get_type_facture_display }}</td>
+                            
+
+                        <td>
+                            <a href="{% url 'detaiFacture' id=facture.id %}" title="Detail" class="badge text-white bg-success">Voire</a> 
+
+                            <button id="btn-invoice-sup" type="button" data-toggle="modal" data-target="#supprimer" class="badge text-white bg-danger" title="Supprimer" data-id="{{ facture.pk }}" data-customer="{{facture.client.nom}}">Supprimer</button>
+
+                           <button id="btn-invoice-mod" type="button" data-toggle="modal" title="Modifier" data-target="#modifier"
+                              data-id="{{facture.pk}}" data-customer="{{facture.client.nom}}"
+                              class="badge text-dark bg-warning"> Modifier
+                           </button>
+                        </td>
+                    </tr>
+                                         {% include 'facture/confirm_delete.html' %}
+        {% endfor %} 
+
+        
+         {% if factures.has_other_pages %}
+
+         <div class="btn-group" role="group" aria-label="Item pagination">
+
+            {% if factures.has_previous %}
+
+            <a href="?page={{ factures.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+
+            {% endif %}
+
+            {% for page_number in factures.paginator.page_range %}
+
+               {% if factures.number == page_number %}
+
+                  <button class="btn btn-outline-primary active">
+                     <span> {{page_number}} <span class="sr-only">(current)</span></span>
+
+                  </button>
+
+                  {% else %}
+                     <a href="?page={{page_number}}" class="btn btn-outline-primary">
+                        {{ page_number }}
+                     </a>
+
+
+               {% endif %}   
+
+            {% endfor %}
+
+            {% if factures.has_next %}
+
+               <a href="?page={{ factures.next_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+
+            {% endif %}
+
+
+
+         </div>
+
+         {% endif %}
+
+         {% else %}
+         
+         
+         <p class="text-center text-white">Pas facture trouvé.</p>
+         {% endif %}
+
+
+                                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+  {% endblock %}

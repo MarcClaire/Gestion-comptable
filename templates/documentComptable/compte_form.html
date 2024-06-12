@@ -1,0 +1,29 @@
+{% extends 'layout/Layout.html' %}
+
+{% block content %}
+    <h1 class="text-capitalize text-center mx-10 bg-dark text-white">{% if object %}Modifier{% else %}Créer{% endif %} un Compte</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+
+        
+        <div class="form-group center-text col-md-6">
+            {{ form.nom.label_tag }}
+            {{ form.nom }}
+        </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            {{ form.type_compte.label_tag }}
+            {{ form.type_compte }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.valeur.label_tag }}
+            {{ form.valeur }}
+        </div>
+    </div>
+        
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary">Enregister</button>                        
+        </div>
+    </form>
+{% endblock %}

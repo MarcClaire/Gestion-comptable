@@ -1,0 +1,73 @@
+ {% extends 'layout/Layout.html'%}
+ <!-- Page Heading -->
+ {% load static %}
+ {% block content %}
+
+{% include  'modal_form.html' %}
+
+
+<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <div class="">
+                              <h4 class="text-capitalize text-center mx-10 bg-dark text-white">Liste des fournisseurs </h4>
+                          </div>
+                          <div class="">                              
+                            <a class="btn btn-outline-info float-right" href="{% url 'addFournisseur'  %}"> NOUVEAU<i class="fas fa-plus"></i></a>
+                            
+                          </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                          <th>Nom Entreprise</th>
+                                          <th>Email</th>
+                                          <th>Téléphone</th>
+                                          <th>adresse géographique</th>
+                                          <th>fournitures</th>
+                                          <th>Date de fourniture</th>
+                                          <th>Payer</th>
+                                          <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for ligne in fournisseurs %}
+                                       <tr>
+                                            <td>{{ ligne.nom }}</td>
+                                            <td>{{ligne.email}}</td>
+                                            <td>{{ligne.tel}}</td>
+                                            <td>{{ligne.adresse}}</td>
+                                            <td>{{ligne.fournitures}}</td>
+                                            <td>{{ligne.date_fourniture}}</td>
+                                            <td>
+                                                {% if ligne.mode_payement %}
+                                                    <img src="{% static 'images/icon-yes.svg' %}" alt="True">
+                                                {% else %}
+                                                    <img src="{% static 'images/icon-no.svg' %}" alt="False">
+                                                {% endif%}
+                                            </td>
+                                            
+                                            <td>
+                                                
+                                                   <button type="button" data-toggle="modal" data-target="#delete{{ligne.id}}" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+
+                                                   <button  type="button" data-toggle="modal" data-target="#update{{ligne.id}}" class="btn btn-outline-success"><i class="fas fa-pen"></i></button>
+
+                                                   <button id="btn-fourni-mod" type="button" data-toggle="modal" title="Modifier" data-target="#modifier"data-id="{{ligne.id}}" class="badge text-dark bg-warning"> Modifier
+                                                    </button>
+                                                
+                                            </td>
+                                         </tr>
+                                         {% include 'fournisseur/confirm_delete.html' %}
+                                      {% endfor %}
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+  {% endblock %}

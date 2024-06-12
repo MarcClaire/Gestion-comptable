@@ -1,0 +1,539 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Comptabilité</title>
+
+    <style>
+        .text-custom-white {
+            color: white ;
+        }
+
+        .bg-color{
+            background-color: #F4661B;
+        }
+        .padding-h{
+            padding-left: 80px;
+        }
+
+        .custom-logo-padding {
+            padding-top: 50px; 
+        }
+        
+        #content-wrapper {
+            margin-left: 200px; 
+            padding-bottom: 60px; 
+        }
+
+        
+        body {
+            background-color: white;
+            padding-bottom: 30px; 
+        }
+    </style>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+
+    <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
+
+    <!-- Facture style  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'img/goodlogooriginal.png' %}" type="image/x-icon">
+
+
+    <!-- jquery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> -->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery/jquery.js' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.map' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.slim.js' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.slim.min.map' %}"></script>
+
+
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper ">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion fixed-sidebar fixed-bottom" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-icon custom-logo-padding">
+                   <img class="img-fluid border-0 " src="{% static 'img/good-logo-original-1.png' %}" alt="" >
+               </div>
+               <div class="sidebar-brand-text mx-3">
+                
+               </div>
+           </a>
+
+           <!-- Divider -->
+           
+
+           <!-- Nav Item - Dashboard -->
+
+           <li class="nav-item active">
+               <a class="nav-link" href="#"><i class="fas fa-fw fa-user"></i>
+                  <span>{{request.user.first_name}}</span>
+              </a>
+          </li>
+
+          <!-- Divider -->
+          <!-- <hr class="sidebar-divider">
+          <div>
+              <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span class="text-dark text-white">{{request.user.username}}</span></a>
+            </li>
+          </div> -->
+          
+
+          <!-- Nav Item - Dashboard -->
+            
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            {% if request.user.is_superuser %}
+            <div class=" text-white font-weight-bold text-xl">
+                <a class="nav-link" href="{% url 'user_list' %}">
+                    <i class="fas fa-users "></i>
+                    <span class="text-white font-weight-bold text-xl">Utilisateurs</span>
+                </a>
+            </div>
+            {% endif %}
+          <!-- Heading -->
+          
+
+          <!-- Nav Item - Pages Collapse Menu -->
+            <!--li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li-->
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- <li class="nav-item">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesConfig"
+               aria-expanded="true" aria-controls="collapseUtilitiesConfig">
+               <i class="fas fa-fw fa-wrench"></i>
+               <span>Config Systeme</span></a>
+               <div id="collapseUtilitiesConfig" class="collapse" aria-labelledby="headingUtilities"
+               data-parent="#accordionSidebar">
+               <div class="bg-white py-2 collapse-inner rounded">
+                   <h6 class="collapse-header">Configuration </h6>
+                   <a class="collapse-item" href="#">Server Email</a>
+                   <a class="collapse-item" href="#">Other</a>
+                   <a class="collapse-item" href="#">Parametre de facturation</a>
+               </div>
+           </div>
+       </li> -->
+
+       <hr class="sidebar-divider">
+
+       <li class="nav-item">
+           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiescomptable"
+           aria-expanded="true" aria-controls="collapseUtilitiescomptable">
+           <i class="fa fa-building" aria-hidden="true"></i>
+           <span>Rapport financier</span></a>
+           <div id="collapseUtilitiescomptable" class="collapse" aria-labelledby="headingUtilities"
+           data-parent="#accordionSidebar">
+           <div class="bg-white py-2 collapse-inner rounded">
+               <h6 class="collapse-header">Bilan</h6>
+               <a class="collapse-item" href="{% url 'compte_list' %}">Compte</a>
+               <a class="collapse-item" href="{% url 'transaction_list' %}">Transaction</a>
+               <a class="collapse-item" href="{% url 'bilan' %}">Bilan</a>
+               <a class="collapse-item" href="#">Compte de Résultats</a>
+               <div class="collapse-divider"></div>
+               <h6 class="collapse-header">Autre</h6>
+               <a class="collapse-item" href="#">Le journal</a>
+               <a class="collapse-item" href="#">Le grand livre</a>
+               <a class="collapse-item" href="#">La balance</a>
+           </div>
+       </div>
+   </li>
+
+   <!-- Divider -->
+   <hr class="sidebar-divider">
+
+
+   <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Charts -->
+               <!-- <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mesclients' %}"><i class="fas fa-users"></i><span>Client</span></a>
+               </li>-->
+
+
+               
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesGestion"
+                    aria-expanded="true" aria-controls="collapsePagesGestion">
+                    <i class="fas fa-users"></i>
+                    <span>Gestion</span>
+                </a>
+                <div id="collapsePagesGestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestion Client</h6>
+                        <a class="collapse-item" href="{% url 'mesclients' %}">Client</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Gestion Fournisseur</h6>
+                        <a class="collapse-item" href="{% url 'mesfournisseurs' %}">Fournisseur</a>
+                        
+                    </div>
+                </div>
+            </li> 
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesFlux"
+                aria-expanded="true" aria-controls="collapsePagesFlux">
+                <i class="fas fa-users"></i>
+                <span>Gestion Flux</span>
+            </a>
+            <div id="collapsePagesFlux" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Gestion des flux d'entré</h6>
+                    <a class="collapse-item" href="{% url 'mesfactures' %}">Facture</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">Gestion des flux de sortie</h6>
+                    <a class="collapse-item" href="{% url 'mesdepenses' %}">Dépense</a>
+                    
+                </div>
+            </div>
+        </li> 
+
+        <hr class="sidebar-divider">
+
+
+
+               <!-- <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mesfactures' %}"><i class="fas fa-file"></i><span>Facture</span></a>
+               </li>
+
+               <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'mesdepenses' %} "><i class="fas fa-file"></i><span>Dépense</span></a>
+               </li>
+
+               <li class="nav-item">
+                    <a class="nav-link" href="{% url 'graphique_ventes' %}"><i class="fas fa-file"></i><span>Statistique</span></a>
+                </li> -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesStatistique"
+                    aria-expanded="true" aria-controls="collapsePagesStatistique">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Statistique</span>
+                </a>
+                <div id="collapsePagesStatistique" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Vente Dépense:</h6>
+                        <a class="collapse-item" href="{% url 'graphique_ventes' %}">Statistique des ventes</a>
+                        <a class="collapse-item" href="{% url 'graphique_depenses' %}">Statistique des dépenses</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><i class="fa-regular fa-circle-info"></i><span>À propos</span></a>
+            </li> 
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            <!-- Sidebar Message -->
+            <!--div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            </div-->
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column ">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-color topbar mb-4 static-top shadow custom-navbar-padding">
+
+
+                    <h1 class="text-capitalize text-center text-white padding-h">Application de gestion comptable</h1>
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                      <i class="fa fa-bars"></i>
+                  </button>
+
+                  <!-- Topbar Navbar -->
+                  <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                     <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="fas fa-search fa-fw"></i></a>
+                     <!-- Dropdown - Messages -->
+                     <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                     aria-labelledby="searchDropdown">
+                     <form class="form-inline mr-auto w-100 navbar-search">
+                       <div class="input-group">
+                          <input type="text" class="form-control bg-light border-0 small"
+                          placeholder="Search for..." aria-label="Search"
+                          aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                             <button class="btn btn-primary" type="button"><i class="fas fa-search fa-sm"></i></button>
+                         </div>
+                     </div>
+                 </form>
+             </div>
+         </li>
+
+  
+<div class="topbar-divider d-none d-sm-block"></div>
+{% if user.is_authenticated %}
+<!-- Nav Item - User Information -->
+<li class="nav-item dropdown no-arrow">
+  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <span class="mr-5 d-none d-lg-inline text-gray-600 small text-custom-white">{{user.username}}</span>
+<img class="img-profile rounded-circle"src="{% static 'img/undraw_profile.svg' %}">
+</a>
+<!-- Dropdown - User Information -->
+<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+aria-labelledby="userDropdown">
+<a class="dropdown-item" href="{% url 'set_profil' %}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Profile</a>
+                                <!--a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a-->
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal">
+                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                             Déconnexion</a>
+                         </div>
+                     </li>
+                     {% endif %}
+
+                 </ul>
+
+             </nav>
+             <!-- End of Topbar -->
+
+             <div class="container">
+               <div class="wrapper">
+                   <br>
+                   {% for message in messages %}
+                   <div class="alert {{message.tags}} alert-dismissible" role="alert">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>{{ message|safe }}</div>
+                     {% endfor %}
+                 </div>
+             </div>
+
+             <!-- Begin Page Content -->
+             <div class="container-fluid">
+
+                {% block content %}
+                
+                {% endblock %}
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+    </div>
+    
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+
+    <!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+</body>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog"  role="document">
+    
+    <div class="modal-content">
+      <form method="POST" action="{% url 'log_out' %}">
+          {% csrf_token  %}
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">DECONNEXION</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">Voulez vous vraiment vous déconnecter !!!!.</div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+            <button class="btn btn-primary" >Oui</button>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+<footer class="sticky-footer bg-dark footer-padding" >
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <h4 style="color: white;">Copyright &copy; PROJET_TUTORE_GENIE_LOGICIEL 2024</h4>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js'%}"></script>
+
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/datatables-demo.js'%}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'vendor/chart.js/Chart.min.js'%}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/chart-area-demo.js'%}"></script>
+<script src="{% static 'js/demo/chart-pie-demo.js'%}"></script>
+
+
+<script>
+    $("#piece_value").change(function(){
+        val=$("#piece_value").val();
+        $('#asi_piece_details').attr('data',val);
+
+    });
+</script>
+<script>
+    $('.facture_proforma').click(function(){
+        var url=$('.facture_proforma').val();
+        $('#pdf_reader').attr('data', url);
+
+    });
+</script>
+<script>
+    $('.col_profil').each(function() {
+
+        id=this.id
+        $.ajax({
+         type: "GET",
+         url: "/user/get_role/"+id,
+         dataType: 'JSON',
+         success: function(response){
+            
+            val=String(response.role)
+            $(".fp_"+id).text(val);
+            $(this).attr('data-th',val);
+            
+        }
+    });
+
+    });
+</script>
+<script>
+    function printPageArea(areaID){
+        var printContent = document.getElementById(areaID).innerHTML;
+        var originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+    }
+</script>
+
+
+
+</html>
