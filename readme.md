@@ -1,6 +1,6 @@
 projet tutoré de Master I semestre 2
-#dependances
 
+#dependances
 pip install psycopg2
 pip install django-phonenumber-field[phonenumbers]
 pip install phonenumbers
